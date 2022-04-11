@@ -5,7 +5,7 @@ FROM nginx:latest
 #WORKDIR /opt/example
 
 # copy all the files to the container
-COPY ./nginx_example.html /usr/share/nginx/html
+COPY ./index.html /usr/share/nginx/html/index.html
 
 # install dependencies
 # RUN pip install --no-cache-dir -r requirements.txt
