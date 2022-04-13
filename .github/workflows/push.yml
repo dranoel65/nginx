@@ -3,7 +3,7 @@ name: build-nginx
 on:
   push:
     branches: 
-      - main
+      - 'main'
 
 jobs:
     build-and-deploy:
@@ -21,27 +21,28 @@ jobs:
         
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v1
-          with:
-            version: v0.7.1
+          #with:
+          #  version: v0.7.1
 
-        - name: Generate Docker metadata
-          id: meta
-          uses: docker/metadata-action@v3
-          with:
-            images: |
-              ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository }}
-            tags: |
-              type=ref,event=branch
-              type=semver,pattern={{version}}
-              type=semver,pattern={{major}}.{{minor}}
-            flavor: |
-              latest=true
+        #- name: Generate Docker metadata
+        #  id: meta
+        #  uses: docker/metadata-action@v3
+        #  with:
+        #    images: |
+        #      ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository }}
+        #    tags: |
+        #      type=ref,event=branch
+        #      type=semver,pattern={{version}}
+        #      type=semver,pattern={{major}}.{{minor}}
+        #    flavor: |
+        #      latest=true
       
         - name: Build and push
           uses: docker/build-push-action@v2
           with:
             context: .
-            file: /Dockerfile
+            file: ./Dockerfile
             push: true
-            tags: ${{ steps.meta.outputs.tags }}
-            labels: ${{ steps.meta.outputs.labels }}
+            tags: ${{ secrets.DOCKERHUB_USERNAME }}/dranoe65_nginx:latest
+            #tags: ${{ steps.meta.outputs.tags }}
+            #labels: ${{ steps.meta.outputs.labels }}
