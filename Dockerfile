@@ -11,7 +11,7 @@ COPY ./index.html /usr/share/nginx/html/index.html
 # RUN pip install --no-cache-dir -r requirements.txt
 
 # tell the port number the container should expose
-EXPOSE 8080
+EXPOSE 80
 
 # run the command
 # CMD ["nginx"]
